@@ -43,7 +43,7 @@ export function useRoom(roomOptions?: RoomOptions): RoomState {
       try {
         const onParticipantsChanged = () => {
           if (!room) return;
-          const remotes = Array.from(room.participants.values());
+          const remotes = Array.from(room.remoteParticipants.values());
           const participants: Participant[] = [room.localParticipant];
           participants.push(...remotes);
           setParticipants(participants);
@@ -55,8 +55,8 @@ export function useRoom(roomOptions?: RoomOptions): RoomState {
             return;
           }
           const tracks: AudioTrack[] = [];
-          room.participants.forEach((p) => {
-            p.audioTracks.forEach((pub) => {
+          room.remoteParticipants.forEach((p) => {
+            p.audioTrackPublications.forEach((pub) => {
               if (pub.audioTrack) {
                 tracks.push(pub.audioTrack);
               }

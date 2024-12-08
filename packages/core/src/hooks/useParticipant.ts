@@ -32,9 +32,9 @@ export function useParticipant(participant: Participant): ParticipantState {
   const [subscribedTracks, setSubscribedTracks] = useState<TrackPublication[]>([]);
 
   const onPublicationsChanged = () => {
-    setPublications(Array.from(participant.tracks.values()));
+    setPublications(Array.from(participant.trackPublications.values()));
     setSubscribedTracks(
-      Array.from(participant.tracks.values()).filter((pub) => {
+      Array.from(participant.trackPublications.values()).filter((pub) => {
         return pub.isSubscribed && pub.track !== undefined;
       }),
     );
@@ -104,7 +104,7 @@ export function useParticipant(participant: Participant): ParticipantState {
   }, [participant]);
 
   let muted: boolean | undefined;
-  participant.audioTracks.forEach((pub) => {
+  participant.audioTrackPublications.forEach((pub) => {
     muted = pub.isMuted;
   });
   if (muted === undefined) {
@@ -120,9 +120,9 @@ export function useParticipant(participant: Participant): ParticipantState {
     connectionQuality,
     publications,
     subscribedTracks,
-    cameraPublication: participant.getTrack(Track.Source.Camera),
-    microphonePublication: participant.getTrack(Track.Source.Microphone),
-    screenSharePublication: participant.getTrack(Track.Source.ScreenShare),
+    cameraPublication: participant.getTrackPublication(Track.Source.Camera),
+    microphonePublication: participant.getTrackPublication(Track.Source.Microphone),
+    screenSharePublication: participant.getTrackPublication(Track.Source.ScreenShare),
     metadata,
   };
 }
