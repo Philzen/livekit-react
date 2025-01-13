@@ -5,17 +5,17 @@
   "author": "davidzhao",
   "license": "Apache-2.0",
   "repository": "livekit/livekit-react",
-  "main": "dist/index.js",
+  "main": "dist/index.mjs",
   "source": "src/index.tsx",
   "homepage": "example.livekit.io",
-  "type": "commonjs",
+  "type": "module",
   "engines": {
     "node": ">=10"
   },
   "exports": {
     ".": {
       "import": "./dist/index.mjs",
-      "require": "./dist/index.js"
+      "require": "./dist/index.cjs"
     }
   },
   "scripts": {
